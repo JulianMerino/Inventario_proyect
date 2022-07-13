@@ -1,0 +1,147 @@
+
+    <!-- Left Panel -->
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav ">
+                    <li class="" routerLink="/administrador">
+                        <a ><i class="menu-icon fa fa-laptop"></i>Equipos</a>
+                    </li>
+                    <li class="" routerLink="/empleado">
+                        <a ><i class="menu-icon fa fa-users"></i>Asignaciones</a>
+                    </li>
+                   
+                    <li class="active" routerLink="admin-login">
+                        <a ><i class="menu-icon fa fa-user "></i>Administrador</a>
+                    </li>
+                    
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside>
+<div id="right-panel" class="right-panel ">
+    <app-navbar></app-navbar>
+      
+      <div class="content " style="background-color:rgb(233, 235, 235)">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header"><strong>Agregar</strong></div>
+                        <div class="card-body card-block">
+                            <form [formGroup]="formularioLogin">
+                            <div class="form-group">
+                                <input type="text" formControlName="nombre" class="form-control" placeholder="Ingresa tu nombre..">
+                            </div>
+                            <div class="form-group">
+                               
+                                <input type="text" formControlName="email" class="form-control" placeholder="Ingresa tu email..">
+                                <div class="form-text text-danger" *ngIf="this.formularioLogin.get('email')?.errors?.['email']">Ingresa un correo valido</div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" formControlName="password" class="form-control" placeholder="Ingresa tu contraseña">
+                                <div class="form-text text-danger" *ngIf="this.formularioLogin.get('password')?.errors?.['minlength']">Minimo 8 caracteres</div>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-outline-primary btn-block" (click)="agregar()">
+                                   
+                                   Guardar
+                                    
+                                </button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+           <!-- .card -->
+
+              <!--
+
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header"><strong>Editar registro</strong></div>
+                        <div class="card-body card-block">
+                            <div class="form-group">
+                                
+                                <input type="text" class="form-control" placeholder="Ingresa tu nuevo nombre..">
+                            </div>
+                            <div class="form-group">
+                               
+                                <input type="text" class="form-control" placeholder="Ingresa  tu nuevo tu email..">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Ingresa  tu nueva tu contraseña..">
+                            </div>
+                            <div>
+                                <button tipe=" button" class="btn btn-outline-primary btn-block">
+                                  Guardar
+                                    
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>.col-->
+
+        </div>
+
+            <div class="clearfix"></div>
+            
+            <!-- Orders -->
+            
+                <div class="row">
+                    <div class="container-fluid">
+                        
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="box-title">Administradores</h4>
+                            </div>
+                            <div class="card-body--">
+                                <div class="">
+                                    <table class="table table-hover table-stats order-table ov-h">
+                                        <thead>
+                                            <tr>
+                                            
+                                                <th>Nombre</th>
+                                                <th>Email</th>
+                                                <th>Contraseña</th>
+                                               
+                                                <th>Eliminar</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let a of admin |paginate: { itemsPerPage: 10, currentPage: pages} ">
+                                                
+                                                <td>{{a.nombre}}</td>
+                                                <td>{{a.email}}</td>
+                                                <td>{{a.password}}</td>
+                                               
+                                                <td>
+                                                    <span class="badge badge-complete bg-danger" (click)="eliminar(a.id)"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                                                      </svg></span>
+                                               </td>
+                                            </tr>
+                                           
+                                         
+                                        </tbody>
+                                    </table>
+                                    <pagination-controls
+                                    (pageChange)="pages = $event"
+                                    
+                                    previousLabel="Anterior"
+                                    nextLabel="Siguiente"
+                                    ></pagination-controls> 
+                                </div> <!-- /.table-stats -->
+                            </div>
+                        </div> <!-- /.card -->
+                    </div>  <!-- /.col-lg-8 -->
+<!-- /.col-md-4 -->
+                </div>
+            </div>
+
+            
+          </div>
+    
