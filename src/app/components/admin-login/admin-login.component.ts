@@ -41,9 +41,11 @@ export class AdminLoginComponent implements OnInit {
   agregar(){
     this.auth.insertarNuevo(this.formularioLogin.value).subscribe( res =>{
       this.mostrarRegistros();
-      console.log("Res: ", res);
       this.formularioLogin.reset();
-    })
+
+      console.log("Res: ", res);
+     
+    });
   }
 
 

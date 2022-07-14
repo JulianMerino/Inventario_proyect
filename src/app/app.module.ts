@@ -5,7 +5,6 @@ import {HttpClientModule} from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { FilterPipe } from './pipes/filter.pipe';
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -17,7 +16,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
   declarations: [
     AppComponent,
     LoginComponent,
-    FilterPipe,
     AdminComponent,
     AdminLoginComponent,
     NavbarComponent,

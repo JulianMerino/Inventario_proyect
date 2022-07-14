@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  respuesta: any;
   loginForm: FormGroup;
   token = true;
 
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.valid){
      this.auth.Login(this.loginForm.value).subscribe(res =>{
       console.log(res);
+      this.respuesta = res.estatus;
       if(res.status== this.token){
         this.auth.setToken(res.status);
       
@@ -36,8 +38,6 @@ export class LoginComponent implements OnInit {
 
       }
       else{
-       
-        alert ("No existe el usuario");
         this.router.navigate(['/']);
         this.loginForm.reset();
       }

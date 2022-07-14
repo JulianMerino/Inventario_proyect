@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup,FormBuilder } from '@angular/forms';
+import { FormGroup,FormBuilder, NgForm } from '@angular/forms';
 import { EquipoService } from 'src/app/services/equipo.service';
 import { equipoI } from 'src/app/models/equipo';
 
@@ -10,10 +10,9 @@ import { equipoI } from 'src/app/models/equipo';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  filterPost ='';
-  //Deditar_equipo: FormGroup;
+  totalRegistros: any;
+  searchText: any;
   datos: equipoI= {id_comp: '',tipo: '', marca:'', modelo: '', n_serie: '', m_ram: '', procesador: '', f_garantia: '', f_compra: '',estatus: ''};
-  filtro: any;
   page: any;
   addEquipo: FormGroup;
   equipos:equipoI[]=[];
@@ -36,31 +35,21 @@ export class AdminComponent implements OnInit {
       f_compra:[''],
       estatus:['']
     });
-
-    this.addEquipo = this.fb.group({
-      tipo:[''],
-      marca:[''],
-      modelo:[''],
-      n_serie:[''],
-      m_ram:[''],
-      procesador:[''],
-      f_garantia:[''],
-      f_compra:[''],
-      estatus:['']
-
-    });
    }
 
   ngOnInit(): void {
 
     this.mostrarRegistros();
+    console.log("Total de registros: ", this.totalRegistros)
   
   }
 
   mostrarRegistros(){
-    this.api.obtenerEquipos().subscribe(res =>{
+     return this.api.obtenerEquipos().subscribe(res =>{
       this.equipos = res;
+      
       console.log(this.equipos)
+      console.log("Total: ",this.equipos.length);
      });
    
     
@@ -69,44 +58,40 @@ export class AdminComponent implements OnInit {
 
  enviarDatos(){
      if(this.addEquipo.valid){
-
-
     this.api.agregarEquipo(this.addEquipo.value).subscribe( res =>{
-      console.log(res);
+      this.mostrarRegistros();
       if(res.resultado == true){
-        this.mostrarRegistros();
-        this.addEquipo.reset();
         console.log('Registro exitoso');
-      }
-      else{
-        alert ('Error');
         this.addEquipo.reset();
       }
+     
+       console.log(res);
     });
   }
  }
 
  obtenerEquipo(id_comp: any){
   this.api.obtenerEquipo(id_comp).subscribe( res  =>{
-  
-  console.log("Equipo recibido",this.datos = res);
-
+    this.totalRegistros = res.lenght;
+    this.datos = res;
   } );
  }
 
 editarEquipo(){
   
   this.api.editarEquipo(this.datos).subscribe( res =>{
-    console.log(res);
     if(res.resultado== true){
-      alert ("Acción realizada correctamente")
+    console.log("Registro editado correctamente")
      this.mostrarRegistros();
     }
+    else{
+    console.log("Error")
     this.mostrarRegistros();
-    
+  }
   });
 
 }
+
 
 
 }

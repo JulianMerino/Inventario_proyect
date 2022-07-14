@@ -1,5 +1,6 @@
 export interface equipoI{
    
+   
     id_comp:  string,
     tipo:  string,
     marca: string,

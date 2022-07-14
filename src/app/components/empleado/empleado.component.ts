@@ -12,9 +12,13 @@ import { equipo_empleadoI } from 'src/app/models/equipo_asignado';
   styleUrls: ['./empleado.component.scss']
 })
 export class EmpleadoComponent implements OnInit {
+  lista: any;
+  resultado: any;
+  searchText: any;
   pages: any;
   equipo_asignado: FormGroup;
   empleado_form: FormGroup;
+  filtro: FormGroup;
    equipos: equipoI[]=[];
    empleados: empleadoI[]=[];
    equipo_empleado: equipo_empleadoI[]=[];
@@ -30,6 +34,10 @@ export class EmpleadoComponent implements OnInit {
       n_completo: [''],
       cliente: [''],
     })
+
+    this.filtro =this.fb.group({
+     filter: [''],
+    }); 
   }
 
   ngOnInit(): void {
@@ -54,19 +62,18 @@ export class EmpleadoComponent implements OnInit {
   }
 
   asignarEquipo(){
-    if(this.equipo_asignado.valid){
+    
       this.e_a.agregarAsignacion(this.equipo_asignado.value).subscribe( res =>{
+        this.resultado = res.resultado;
         if(res.resultado == true){
           this.registros();
           this.equipo_asignado.reset();
         }
        
-      })
-    }
-
+      });
   }
 
-
+//Trae todos los registros de los equipos asignados a un empleado
   agregarEmpleado(){
 
     if(this.empleado_form.valid){
@@ -93,5 +100,9 @@ export class EmpleadoComponent implements OnInit {
   }
 
 
+  resetForm(){
+    this.equipo_asignado.reset();
+   
+  }
 
 }

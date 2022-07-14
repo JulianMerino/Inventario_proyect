@@ -23,90 +23,103 @@
     <app-navbar></app-navbar>
       
       <div class="content " style="background-color:rgb(233, 235, 235)">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="container">                   
-                    <div class="card">
-                        <div class="card-header"><strong>Agregar empleado</strong></div>
-                        <div class="card-body card-block">
-                            <form [formGroup]="empleado_form">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Nombre" formControlName="n_completo" >
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Cliente" formControlName="cliente">
-                            </div>
-                          
-                            <div>
-                                <button type="submit" class="btn btn-outline-primary" (click)="agregarEmpleado()">
-                                   
-                                   Guardar
-                                    
-                                </button>
-                            </div>
-                        </form>
-                        </div>
-                    </div>
-                </div>
- 
-                </div>
-           <!-- .card -->
-
-              <!--/.col-->
-
-                <div class="col-lg-6">
-                    <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-header"><strong>Editar registro</strong></div>
-                        <div class="card-body card-block">
-                            <div class="form-group">
-                                
-                                <input type="text" class="form-control" placeholder="Nombre..">
-                            </div>
-                            <div class="form-group">
-                               
-                                <input type="text" class="form-control" placeholder="Cliente..">
-                            </div>
-                            <div>
-                                <button tipe=" button" class="btn btn-outline-primary">
-                                  Guardar
-                                    
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-            </div>
-
-        </div>
-
             <div class="clearfix"></div>
 
             <div class="card">
-                <div class="card-header">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <section class="card">
+                              <div class="card-body"> <h4 class="box-title">Agregar nuevo empleado</h4></div>
+                                <div class="card-body text-secondary">
+                                   
+                                     
+                                      
+                                            <form [formGroup]="empleado_form">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Nombre" formControlName="n_completo" >
+                                            </div>
+                                            <div class="form-group">
+                                               
+                                                <select class="form-select" aria-label="Default select example" formControlName="cliente">
+                                                    <option label="Cliente" disabled></option>
+                                                    <option value="BBVA">BBVA</option>
+                                                    <option value="Banamex">Banamex</option>
+                                                   
+                                                  </select>
+                                            </div>
+                                          
+                                            <div>
+                                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                    <button type="submit" class="btn btn-outline-primary" (click)="agregarEmpleado()">
+                                                   
+                                                        Guardar
+                                                         
+                                                     </button>
+                                                </div>
+                                               
+                                            </div>
+                                        </form>
+                                       
+                                   
+                                </div>
+                            </section>
+                            <section class="card">
+                                <div class="card-body"> <h4 class="box-title">Agregar nuevo cliente</h4></div>
+                                  <div class="card-body text-secondary">
+                                     
+                                       
+                                        
+                                              <form [formGroup]="empleado_form">
+                                              
+                                              <div class="form-group">
+                                                  <input type="text" class="form-control" placeholder="Cliente" formControlName="cliente">
+                                              </div>
+                                            
+                                              <div>
+                                                  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                      <button type="submit" class="btn btn-outline-primary" >Guardar</button>
+                                                  </div>
+                                                 
+                                              </div>
+                                          </form>
+                                         
+                                     
+                                  </div>
+                              </section>
+                        </div>
+                        <div class="col-lg-8">
+                            <section class="card">
+                                <div class="card-body text-secondary">
+                                    
+                <div class="card-body">
                     <strong class="card-title">Asignación de computadoras</strong>
                 </div>
+               
                 <form [formGroup]="equipo_asignado">
                 <div class="card-body">
-                    <label class=" form-control-label">Empleado</label>
-                    <select class="form-select" aria-label="Default select example" formControlName="fk_id_empleado" >
-                        <option value="" label="Listado de empleados"></option>
-                        <option *ngFor="let empleado of empleados" value="{{empleado.id_prop}}">{{empleado.n_completo}} - {{empleado.cliente}}</option>
-                     
-                      </select>
-    
-                 
+                        <label for="exampleDataList" class="form-label">Empleado:</label>
+                        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Seleccionar empleado"  formControlName="fk_id_empleado">
+                        <datalist id="datalistOptions">
+                            <option *ngFor="let empleado of empleados " value="{{empleado.id_prop}} ">{{empleado.n_completo}} - {{empleado.cliente}}</option>
+                         
+                          </datalist>
+                          
+
+                          
+                   
             </div>
             <div class="card-body">
-                <label for="nf-email" class=" form-control-label">Equipo</label>
-                <select class="form-select" aria-label="Default select example" formControlName="fk_id_equipo">
-                    <option value="" label="Listado de equipos" ></option>
-                    <option *ngFor="let equipo of equipos" value="{{equipo.id_comp}}" >{{equipo.tipo}} - {{equipo.marca}} - {{equipo.n_serie}}</option>
+               
+
+                  <label for="exampleDataList" class="form-label">Equipo:</label>
+                  <input class="form-control" list="listOptions" id="exampleDataList" placeholder="Seleccionar equipo"  formControlName="fk_id_equipo">
+                  <datalist id="listOptions">
+                      <option *ngFor="let equipo of equipos" value="{{equipo.id_comp}}">{{equipo.tipo}} - {{equipo.marca}} -{{equipo.modelo}}- {{equipo.n_serie}} </option>
                    
-                  </select>
+                    </datalist>
+                    
+                  
 
              
         </div>
@@ -115,29 +128,49 @@
             <input type="date" class="form-control" placeholder="Memoria ram" formControlName="f_asignacion">
         </div>
         <div class="card-body">
-            <button tipe=" button" class="btn btn-outline-primary" (click)="asignarEquipo()">Asignar </button>
-        </div>
+            <div class=" row form-group">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button class="btn btn-outline-secondary me-md-2" type="button" (click)="resetForm()">Cancelar</button>
+                    <button class="btn btn-outline-primary" type="button" (click)="asignarEquipo()">Guardar </button>
+                  </div>
+               
+                 <div class="col col-md-6">
+                    <div class="alert alert-primary alert-dismissible fade show justify-content-md-end" role="alert" *ngIf="this.resultado !false">
+                        <strong>Acción realizada con exito</strong> 
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div></div>
+                </div>
+            </div>
     </form>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                
+
+        
+                </div>
         </div>
-            
-        <div class="clearfix">
-
-
-            <!-- Orders -->
+      
             
                 <div class="row">
                     <div class="container-fluid">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="box-title">Registros de equipo asignados</h4>
+                               
+                                <div class="container">   
+                                    <label class=" form-control-label">Filtro:</label>
+                                    <input class="form-control me-2" type="search" placeholder="" aria-label="Search" [(ngModel)]="searchText" >
+                                </div>
+                            
                             </div> 
-                            <div class="card-body">
-                                  <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                              </div>
+                           
                             <div class="card-body--">
                                 <div class="container-fluid">
-                                    <table class="table">
-                                        <thead>
+                                    <table class="table table-bordered table-hover" >
+                                        <thead class="table-dark">
                                             <tr>
                                                 <th class="serial">#</th>
                                                 <th>Nombre</th>
@@ -145,23 +178,25 @@
                                                 <th>F. asignación</th>
                                                 <th>Equipo asignado</th>
                                               
-                                                <th>Eliminar</th>
+                                                <th>Estado</th>
                                                 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let e_a of equipo_empleado">
+                                            <tr *ngFor="let e_a of equipo_empleado
+                                            | paginate: { itemsPerPage: 15, currentPage: pages }
+                                            | filter: searchText">
                                                 <td class="serial">1.</td>
                                                 <td>{{e_a.n_completo}}</td>
                                                 <td> {{e_a.cliente}}</td>
                                                 <td>{{e_a.f_asignacion}}</td>
                                                 <td> 
                                                     <div class="dropdown">
-                                                        <a id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <a class="dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                                             {{e_a.tipo}}
                                                         </a>
                                                       
-                                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                        <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuLink">
                                                             <div>
                                                          
                                                           <li><a class="dropdown-item">Marca:{{e_a.marca}}</a></li>
@@ -174,16 +209,14 @@
                                                           <li><a class="dropdown-item">Estatus: {{e_a.estatus}}</a></li>
 
                                                             </div>
-                                                          
                                                         </ul>
                                                       </div>
-                                             
-                                                  
-                                           
+
+                                                      
+                                                    </td>
+
                                                 <td>
-                                                    <span class="badge badge-complete bg-danger"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
-                                                      </svg></span>
+                                                   Activo
                                                </td>
                                             </tr>
                                            

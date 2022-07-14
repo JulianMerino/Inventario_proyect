@@ -1,6 +1,4 @@
 
-
-
     <!-- Left Panel -->
     <aside id="left-panel" class="left-panel" >
         <nav class="navbar navbar-expand-sm navbar-default ">
@@ -12,11 +10,9 @@
                     <li class="" routerLink="/empleado">
                         <a ><i class="menu-icon fa fa-users"></i>Asignaciones</a>
                     </li>
-                   
                     <li class="" routerLink="/admin-login">
                         <a ><i class="menu-icon fa fa-user"></i>Administrador</a>
                     </li>
-                    
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
@@ -24,151 +20,164 @@
   
 <div id="right-panel" class="right-panel ">
     <app-navbar></app-navbar>
-      
       <div class="content" style="background-color:rgb(233, 235, 235)">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="container-fluid">
-                    <div class="card">
-                       
-                           <div class="card-header">
-                            <strong>Agregar nuevo equipo</strong>
-                        </div>
-                        <div class="card-body card-block">
-                            <form [formGroup]="addEquipo">
-                            <div class=" row form-group">
-                                <div class="col col-md-6">
-                                    <select class="form-select" aria-label="Default select example" formControlName="tipo">
-                                        <option value="" label="Tipo" ></option>
-                                        <option value="PC" label="PC" ></option>
-                                        <option value="Laptop" label="Laptop" ></option>
-                                      </select>
-                              </div>
-                                <div class="col col-md-6">
-                                    <select class="form-select" aria-label="Default select example" formControlName="marca">
-                                        <option value="" label="Tipo" ></option>
-                                        <option value="PC" label="Lenovo" ></option>
-                                        <option value="Laptop" label="Laptop" ></option>
-                                      </select></div>
-                            </div>
-                            <div class=" row form-group">
-                                <div class="col col-md-6"><input type="text" formControlName="modelo" class="form-control" placeholder="Modelo"></div>
-                                <div class="col col-md-6"> <input type="text"  formControlName="n_serie" class="form-control" placeholder="Número de serie"></div>
-                                
-                            </div>
-                            
-                            <div class="form-group">
-                                
-                                <input type="text" formControlName="m_ram"  class="form-control" placeholder="Memoria ram">
-                            </div>
-                            <div class="form-group">
-                               
-                                <input type="text" formControlName="procesador"  class="form-control" placeholder="Procesador">
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-6">
-                                    <label for="nf-email" class=" form-control-label">F. de garantía</label>
-                                    <input type="date" formControlName="f_garantia" class="form-control" placeholder="Fecha de garantía">
-                                </div>
-                                <div class="col col-md-6">
-                                    <label for="nf-email" class=" form-control-label">F. de compra</label>
-                                    <input type="date" formControlName="f_compra" class="form-control" placeholder="Fecha de compra"></div>
-                               
-                            </div>
-                            <div class="form-group">
-                                
-                                <input type="text" formControlName="estatus" class="form-control" placeholder="Estatus">
-                            </div>
-                      
-                          
-                            <div>
-                                
-                              
-                                <button type="submit" class="btn btn-outline-primary btn-block" (click)="enviarDatos()">Guardar</button>
-                            </div>
-                        </form>
-                        </div>
-                    </div>
-                </div>
-
-                </div>
-           <!-- .card -->
-
-              <!--/.col-->
-
-                <div class="col-lg-6">
-                    <div class="container-fluid">
-                                            <div class="card">
-                        <div class="card-header"><strong>Editar registro</strong></div>
-                        <div class="card-body card-block">
-                            
-                            <div class=" row form-group">
-                                <div class="col col-md-6"> <input type="text" class="form-control" placeholder="Tipo" [(ngModel)]="datos.tipo"></div>
-                                <div class="col col-md-6"><input type="text" class="form-control" placeholder="Marca" [(ngModel)]="datos.marca"></div>
-                            </div>
-                            <div class=" row form-group">
-                                <div class="col col-md-6"><input type="text" class="form-control" placeholder="Modelo" [(ngModel)]="datos.modelo"></div>
-                                <div class="col col-md-6"> <input type="text" class="form-control" placeholder="Número de serie" [(ngModel)]="datos.n_serie"></div>
-                                
-                            </div>
-                           
-                            <div class="form-group">
-                                
-                                <input type="text" class="form-control" placeholder="Memoria ram" [(ngModel)]="datos.m_ram">
-                            </div>
-                            <div class="form-group">
-                               
-                                <input type="text" class="form-control" placeholder="Procesador" [(ngModel)]="datos.procesador">
-                            </div>
-                            <div class="row form-group">
-                                <div class="col col-md-6">
-                                    <label for="nf-email" class=" form-control-label">F. de garantía</label>
-                                    <input type="date" class="form-control" placeholder="Fecha de garantía" [(ngModel)]="datos.f_garantia">
-                                </div>
-                                <div class="col col-md-6">
-                                    <label for="nf-email" class=" form-control-label">F. de compra</label>
-                                    <input type="date" class="form-control" placeholder="Fecha de compra" [(ngModel)]="datos.f_compra"></div>
-                               
-                            </div>
-                        
-                            <div class="form-group">
-                                
-                                <input type="text" class="form-control" placeholder="Estatus" [(ngModel)]="datos.estatus">
-                            </div>
-                           
-                            <div>
-                                <button tipe=" button" class="btn btn-outline-primary btn-block" (click)="editarEquipo()">Guardar</button>
-                            </div>
-                        
-                        </div>
-                    </div>
-                </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
             <div class="clearfix"></div>
-            
-            <!-- Orders -->
-            
                 <div class="row">
-                    <div class="container-fluid">
-                        <div class="card">
+                        <div class="card"> 
                             <div class="card-body">
-                                <h4 class="box-title">Registro de computadoras</h4>
-                            </div>
-                            <div class="card-body">
-                                <input class="form-control me-2" type="text" placeholder="Buscar" aria-label="Search" [(ngModel)]="filterPost">
-                            </div>
-                            <div class="card-body--">
-                                
+                                <div class="row">
+                                    <div class="col">
+                                        <section class="card">
+                                            <div class="card-body"> <h4 class="box-title">Agregar nuevo equipo</h4></div>
+                                            <div class="card-body text-secondary">
+                                                
+                                                    <form [formGroup]="addEquipo">
+                                                    <div class=" row form-group">
+                                                        <div class="col col-md-6">
+                                                            <select class="form-select form-select-sm" aria-label="Default select example" formControlName="tipo" >
+                                                                <option label="Tipo" disabled ></option>
+                                                                <option value="PC" label="PC" ></option>
+                                                                <option value="Laptop" label="Laptop" ></option>
+                                                              </select>
+                                                      </div>
+                                                        <div class="col col-md-6">
+                                                            <select class="form-select form-select-sm" aria-label="Default select example" formControlName="marca" >
+                                                                <option label="Marca" disabled></option>
+                                                                <option value="Lenovo" >Lenovo</option>
+                                                                <option value="Dell">Dell</option>
+                                                                <option value="Mac" >Mac</option>
+                                                              </select>
+                                                            </div>
+                                                    </div>
+                                                    <div class=" row form-group">
+                                                        <div class="col col-md-6"><input type="text" formControlName="modelo" class="form-control form-control-sm" placeholder="Modelo" ></div>
+                                                        <div class="col col-md-6"> 
+                                                            
+                                                            <input type="text"  formControlName="n_serie" class="form-control form-control-sm" placeholder="Número de serie" ></div>
+                                                        
+                                                    </div>
+                                                    <div class=" row form-group">
+                                                        <div class="col col-md-6"><input type="text" formControlName="m_ram"  class="form-control form-control-sm" placeholder="Memoria ram" > </div>
+                                                        <div class="col col-md-6">    <input type="text" formControlName="procesador"  class="form-control form-control-sm" placeholder="Procesador" >   </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-6">
+                                                            <label for="nf-email" class=" form-control-label">Memoria</label>
+                                                            <input type="date" formControlName="f_garantia" class="form-control form-control-sm" placeholder="Fecha de garantía" >
+                                                        </div>
+                                                        <div class="col col-md-6">
+                                                            <label for="nf-email" class=" form-control-label">Capacidad</label>
+                                                            <input type="date" formControlName="f_compra" class="form-control form-control-sm" placeholder="Fecha de compra" ></div>
+                                                       
+                                                    </div>
+
+                                                    <div class="row form-group">
+                                                        <div class="col col-md-6">
+                                                            <label for="nf-email" class=" form-control-label">F. de compra</label>
+                                                            <input type="date" formControlName="f_compra" class="form-control form-control-sm" placeholder="Fecha de compra" >
+                                                        </div>
+                                                       
+
+                                                        <div class="col col-md-6">
+                                                            <label for="nf-email" class=" form-control-label">F. de garantía</label>
+                                                            <input type="date" formControlName="f_garantia" class="form-control form-control-sm" placeholder="Fecha de garantía" >
+                                                        </div>
+                                                       
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <select class="form-select form-select-sm" aria-label="Default select example" formControlName="estatus">
+                                                            <option value="No asignado">No asignado</option>
+                                                            <option value="Asignado">Asignado</option>
+                                                          
+                                                           
+                                                          </select>
+                                                       
+                                                    </div>
+                                                  
+                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+
+
+                                                    <div>
+                                                       <button type="button" class="btn btn-outline-primary btn-block btn-sm" (click)="enviarDatos()">Guardar</button>
+                                                    </div>
+                                                </form>
+                                                
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="col">
+                                        <section class="card">
+                                            <div class="card-body"> <h4 class="box-title">Editar registro de equipo</h4></div>
+                                            <div class="card-body text-secondary">
+                                               
+                                        
+                                                 
+                                                
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="col">
+                                        <section class="card">
+                                            <div class="card-body"> <h4 class="box-title">Catalogo</h4></div>
+                                            <div class="card-body text-secondary">
+                                               
+                                                <div class="form-group">
+                                                    <label for="nf-email" class=" form-control-label">Agregar nueva marca</label>
+                                                    <div class="hstack gap-3">
+                                                        <input class="form-control me-auto" type="text" placeholder="" >
+                                                        <button type="button" class="btn btn-outline-success">Agregar</button>            
+                                                    </div>
+                                                </div>
+                                              
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                              
+                               
+                               
+                                  
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row form-group">
+                                <div class="col col-md-6">
+                                  
+                                <h4 class="box-title">Registro de computadoras</h4>      
+                                </div>
+                                <div class="col col-md-6">
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                     
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="stat-widget-four ">
+                                                    <div class="stat-icon dib">
+                                                        <i class="fa fa-desktop text-muted"></i>
+                                                    </div>
+                                                    <div class="stat-content">
+                                                        <div class="text-left dib">
+                                                            <div class="stat-heading">Computadoras</div>
+                                                            <div class="stat-text">Total: 24720</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                            </div>  
+                    </div>
+                                <div class="container">
+                                    <label for="nf-email" class=" form-control-label">Filtrar</label>
+                            <input class="form-control me-2" type="text" placeholder="Buscar" aria-label="Search" [(ngModel)]="searchText" autocomplete="on">
+                        </div>
+                    </div>
+                        <div class="card-body--"> 
+                            
                                 <div class="container-fluid">
-                                    <table class="table table-hover table-stats order-table ov-h">
-                                        <thead>
+                                    <table class="table table-hover table-stats  table-bordered">
+                                        <thead class="table-dark">
                                             <tr>
                                                
                                                 <th>Tipo</th>
@@ -188,7 +197,7 @@
                                         <tbody>
                                             <tr *ngFor="let e of equipos
                                             | paginate: { itemsPerPage: 10, currentPage: page }
-                                            ">
+                                            | filter:searchText; index as i">
                                                
                                                 <td>{{e.tipo}}</td>
                                                 <td> {{e.marca}}</td>
@@ -199,36 +208,99 @@
                                                 <td> {{e.f_garantia}}</td>
                                                 <td> {{e.f_compra}}</td>
                                                 <td> {{e.estatus}}</td>
-                                                <td>
-                                                    <span class="badge badge-complete" (click)="obtenerEquipo(e.id_comp)" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                      </svg></span>
-                                                
+                                                <td class="text-center">
+                                                <span class="badge badge-complete bg-warning text-center" (click)="obtenerEquipo(e.id_comp)" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill " viewBox="0 0 16 16">
+                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                              </svg>
+                                            </span> 
                                                </td>
                                             </tr>
-                                           
-                                         
                                         </tbody>
                                     </table>
-                                   
-                                </div>
-                                
+                                </div>     
                             </div>
                             <pagination-controls
                                 (pageChange)="page = $event"
-                                
                                 previousLabel="Anterior"
                                 nextLabel="Siguiente"
                                 ></pagination-controls> 
                         </div> <!-- /.card -->
-                    </div>  <!-- /.col-lg-8 -->
-<!-- /.col-md-4 -->
+                   <!-- /.col-lg-8 -->
                 </div>
             </div>
-
-            
           </div>
 
          
     
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar registro de equipo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="card-body text-secondary">
+                <div class=" row form-group">
+                    <div class="col col-md-6">
+                        <select class="form-select form-select-sm" aria-label="Default select example" [(ngModel)]="datos.tipo" >
+                            <option label="Tipo" disabled ></option>
+                            <option value="PC" label="PC" ></option>
+                            <option value="Laptop" label="Laptop" ></option>
+                          </select>
+                        </div>
+                    <div class="col col-md-6">
+                       
+                        <select class="form-select form-select-sm" aria-label="Default select example" [(ngModel)]="datos.marca" >
+                            <option label="Marca" disabled></option>
+                            <option value="Lenovo" >Lenovo</option>
+                            <option value="Dell">Dell</option>
+                            <option value="Mac" >Mac</option>
+                          </select>
+                    </div>
+                </div>
+                <div class=" row form-group">
+                    <div class="col col-md-6"><input type="text" class="form-control" placeholder="Modelo" [(ngModel)]="datos.modelo"></div>
+                    <div class="col col-md-6"> <input type="text" class="form-control" placeholder="Número de serie" [(ngModel)]="datos.n_serie"></div>
+                    
+                </div>
+                <div class=" row form-group">
+                    <div class="col col-md-6"><input type="text"    class="form-control" placeholder="Memoria ram" [(ngModel)]="datos.m_ram" > </div>
+                    <div class="col col-md-6">    <input type="text"   class="form-control" placeholder="Procesador" [(ngModel)]="datos.procesador" >   </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col col-md-6">
+                        <label for="nf-email" class=" form-control-label">F. de garantía</label>
+                        <input type="date" class="form-control" placeholder="Fecha de garantía" [(ngModel)]="datos.f_garantia">
+                    </div>
+                    <div class="col col-md-6">
+                        <label for="nf-email" class=" form-control-label">F. de compra</label>
+                        <input type="date" class="form-control" placeholder="Fecha de compra" [(ngModel)]="datos.f_compra"></div>
+                   
+                </div>
+            
+                <div class="form-group">
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="datos.estatus">
+                        <option label="Estatus" disabled></option>
+                        <option value="Asignado">Asignado</option>
+                        <option value="No asignado">No asignado</option>
+                       
+                      </select>
+                   
+                </div>
+                 
+               
+                 
+            
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="editarEquipo()">Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>

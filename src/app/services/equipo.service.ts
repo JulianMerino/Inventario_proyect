@@ -6,13 +6,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EquipoService {
-  //Dirección en donde se encuentra el api
+  //Dirección del api
   url = 'http://localhost/server/api-rest/api-equipo';
 
   constructor(private http: HttpClient) { }
 
 agregarEquipo(registro: any): Observable<any>{
-  return this.http.post(this.url+ '/post.php', registro);
+  console.log("registro del service:", registro)
+  return this.http.post(this.url + '/post.php', registro);
 
 }
 
