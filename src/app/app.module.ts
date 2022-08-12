@@ -8,9 +8,10 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { EmpleadoComponent } from './components/empleado/empleado.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { AsignacionesComponent } from './components/asignaciones/asignaciones.component';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     AdminComponent,
     AdminLoginComponent,
     NavbarComponent,
-    EmpleadoComponent
+    AsignacionesComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +29,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     FormsModule,
     HttpClientModule,
     NgxPaginationModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

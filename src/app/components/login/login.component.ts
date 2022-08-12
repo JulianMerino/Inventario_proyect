@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,6 +13,7 @@ export class LoginComponent implements OnInit {
   respuesta: any;
   loginForm: FormGroup;
   token = true;
+  token_encrypt: any;
 
 
   
@@ -29,15 +32,19 @@ export class LoginComponent implements OnInit {
   Onsubmit(){
     if(this.loginForm.valid){
      this.auth.Login(this.loginForm.value).subscribe(res =>{
-      console.log(res);
       this.respuesta = res.estatus;
       if(res.status== this.token){
         this.auth.setToken(res.status);
-      
         this.router.navigate(['/administrador']);
-
       }
       else{
+        Swal.fire({
+          icon: 'error',
+          text: 'Acceso denegado',
+          showConfirmButton: false,
+          timer: 1000
+        })
+     
         this.router.navigate(['/']);
         this.loginForm.reset();
       }

@@ -1,0 +1,128 @@
+<!-- Left Panel -->
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default " >
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li routerLink="/administrador">
+                        <a ><i class="menu-icon fa fa-laptop"></i>Equipos</a>
+                    </li>
+                    <li class="active" routerLink="/asignaciones">
+                        <a ><i class="menu-icon fa fa-users"></i>Asignaciones</a>
+                    </li>
+                    <li routerLink="/admin-login">
+                        <a ><i class="menu-icon fa fa-user"></i>Administrador</a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside>
+<div id="right-panel" class="right-panel">
+   <app-navbar></app-navbar>
+      <div class="content bg-light" > <!-- style="background-color:rgb(233, 235, 235); max-width: 100%;"-->
+        <div class="animated fadeIn">
+            <div class="clearfix"></div>
+                 <div class="row">
+                    <div class="card">
+                         <div class="card-body"> 
+                             <div class=" row form-group">
+                                 <div class="col col-md-6">
+                                     <h4 class="box-title">Registros de equipos asignados</h4>
+                                 </div>
+                                 <div class="col col-md-6">
+                                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    </div>
+                                 </div>
+                             </div>
+                            </div>
+                             <div class="mb-2 d-flex justify-content-between align-items-center">
+                                <div class="position-relative">
+                                    <span class="position-absolute search"><i class="fa fa-search"></i></span>
+                                    <input class="form-control w-100 contenedorInput" placeholder="Buscar..." [(ngModel)]="searching" autocomplete="on">
+                                </div>
+                                <div class="px-2" style="font-size:small;">
+                                    <span>Total de registros: {{this.totalRegistros}}</span>
+                                </div> 
+                            </div>
+                             <div class="">
+                                 <table class="table table-sm" style="font-size:small;" >
+                                     <thead class="table-light">
+                                         <tr>
+                                             <th>Nombre</th>
+                                             <th>Cliente</th>
+                                             <th>Equipo asignado</th>
+                                             <th>F. asignación</th>
+                                            <th>F. baja</th>
+                                             <th>Estado</th>
+                                             <th class="text-center">Acción</th>
+                                         </tr>
+                                     </thead>
+                                     <tbody>
+                                         <tr *ngFor="let e_a of equipo_empleado
+                                         | filter: searching
+                                         | paginate: { itemsPerPage: 10, currentPage: pages, id: 'equipo_asignado' }"> 
+                                             <td >{{e_a.n_completo}}</td>
+                                             <td> {{e_a.cliente}}</td> 
+                                             <td> 
+                                                 <div class="dropdown">
+                                                     <a class="dropdown-toggle text-primary" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                                         {{e_a.tipo}}
+                                                     </a>
+                                                     <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuLink">
+                                                      <div class="table-responsive" style="font-size: smaller">
+                                                       <li>Marca:{{e_a.marca}}</li>
+                                                       <li>Modelo: {{e_a.modelo}}</li>
+                                                       <li>N. serie: {{e_a.n_serie}}</li>
+                                                       <li>M. ram: {{e_a.m_ram}}</li>
+                                                       <li>Procesador: {{e_a.procesador}}</li>
+                                                       <li>T. memoria: {{e_a.t_memoria}}</li>
+                                                       <li>Capacidad: {{e_a.capacidad}}</li>
+                                                       <li>F. compra: {{e_a.f_compra}}</li>
+                                                       <li>F. garantía: {{e_a.f_garantia}}</li>
+                                                       <li>Estatus: {{e_a.estatus}}</li>
+                                                       <li>Observaciones: {{e_a.observaciones}}</li>
+                                                    </div>   
+                                                     </ul>
+                                                   </div>
+                                                   <div class="dropdown">
+                                                    <a class="dropdown text-primary" id="dropdownMenuLinkMouse" data-bs-toggle="dropdown" aria-expanded="false" *ngIf="e_a.tipo_mouse != ''">
+                                                        {{e_a.tipo_mouse}}
+                                                    </a>
+                                                    <ul class="dropdown-menu bg-light" aria-labelledby="dropdownMenuLinkMouse" *ngIf="e_a.tipo_mouse != ''" > 
+                                                     <div class="table-responsive" style="font-size:small">
+                                                      <li>Marca:{{e_a.marca_mouse}}</li>
+                                                      <li>Modelo: {{e_a.modelo_mouse}}</li>
+                                                      <li>N. serie: {{e_a.n_serie_mouse}}</li>
+                                                     <li>Estatus: {{e_a.estatus_mouse}}</li>
+                                                
+                                                   </div>   
+                                                    </ul>
+                                                  </div>   
+                                                 </td>
+                                                 <td>{{e_a.f_asignacion}}</td>
+                                                 <td *ngIf="e_a.f_baja != '0000-00-00'">{{e_a.f_baja}}</td>
+                                                 <td *ngIf="e_a.f_baja == '0000-00-00'"></td>
+                                                 <td>
+                                                  <i class="fa fa-check-circle-o green" disabled *ngIf="e_a.estado == 'Activo'"></i><span class="ms-1" disabled *ngIf="e_a.estado == 'Activo'">{{e_a.estado}}</span>
+                                                  <i class="fa fa-dot-circle-o text-danger" disabled *ngIf="e_a.estado == 'Inactivo'"></i><span class="ms-1" disabled *ngIf="e_a.estado == 'Inactivo'">{{e_a.estado}}</span>
+                                                </td>
+                                                <td class="text-center">
+                                               <button class="btn btn-secondary btn-sm"  *ngIf="e_a.estado =='Activo'" (click)="bajaEquipoAsig(e_a.estado,e_a.id_empleado_equipo, e_a,e_a.estatus,e_a.f_baja, e_a.id_comp, e_a.id_mouse)" >Dar de baja</button>
+                                            </td>
+                                         </tr>
+                                     </tbody>
+                                 </table>
+                            <pagination-controls
+                             previousLabel=""
+                             nextLabel=""
+                             (pageChange)="pages = $event" id= "equipo_asignado"
+                             ></pagination-controls>
+                        </div>       
+                     </div> 
+                </div>                
+            </div>
+        </div>
+
+
+
+
+         

@@ -2,16 +2,21 @@
   <header id="header" class="header bg-dark">
     <div class="top-left bg-dark">
         <div class="navbar-header bg-dark ">
-            <a class="navbar-brand text-light">Sistema de inventario</a>
-         
-            <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+            <a class="navbar-brand text-light" disabled>Sistema de inventario</a>  
+                <a class="menutoggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-bars"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" routerLink="/administrador">Equipos</a></li>
+                    <li><a class="dropdown-item" routerLink="/asignaciones">Asignaciones</a></li>
+                    <li><a class="dropdown-item" routerLink="/admin-login">Administrador</a></li>
+                  </ul>
+                
         </div>
     </div>
     <div class="top-right bg-dark" >
-        <div class="header-menu bg-dark">
-        
+        <div class="header-menu bg-dark">    
             <div class="user-area dropdown float-right ">
-                <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                
                     <img class="user-avatar rounded-circle" src="../../../assets/admin.png" alt="User Avatar">
                 </a>
 

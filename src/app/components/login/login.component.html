@@ -8,23 +8,24 @@
             <div class="card-body p-5">
              
               <div class="text-center">
-             
-                <h4 class="mt-1 mb-5 pb-1">Inicio de sesión</h4>
+                <img src="../../../assets/sitdigital.png"
+                  style="width: 200px; height: 150px;" alt="logo">
+                  <h4 class="mt-1 mb-5 pb-1 text-center">Inicio de sesión</h4>
               </div>
               <form [formGroup]="loginForm">
                 <div class="mb-3">
-                  <label class="form-label">Email</label>
-                  <input type="email" class="form-control" formControlName="email">
+                  <label class="form-label form-control-sm">Email</label>
+                  <input type="email" class="form-control form-control-sm" formControlName="email">
                   <div class="form-text text-danger" *ngIf="this.loginForm.get('email')?.errors?.['email']">Ingresa un correo valido</div>
                 </div>
                 <div class="mb-3">
-                  <label class="form-label">Contraseña</label>
-                  <input type="password" class="form-control" formControlName="password" >
+                  <label class="form-label form-control-sm">Contraseña</label>
+                  <input type="password" class="form-control form-control-sm" formControlName="password" >
                   <div class="form-text text-danger" *ngIf="this.loginForm.get('password')?.errors?.['minlength']">Minimo 8 caracteres</div>
                 </div>
                 
                 <div class="mb-3 text-center">
-                  <button type="submit" class="btn btn-outline-primary text-center" style="width: 100%; margin-top: 1rem;" (click)="Onsubmit()">Ingresar</button>
+                  <button type="submit" class="btn btn-outline-primary text-center btn-sm" style="width: 100%; margin-top: 1rem;" (click)="Onsubmit()">Ingresar</button>
                 </div>          
               </form> 
               <div class="alert alert-info alert-dismissible fade show" role="alert" *ngIf="this.respuesta == false">

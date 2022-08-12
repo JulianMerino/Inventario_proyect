@@ -11,6 +11,10 @@ export interface equipoI{
     f_garantia:  string,
     f_compra:  string,
     estatus:  string,
+    t_memoria:  string,
+    capacidad:  string,
+    observaciones:  string
+
 }
 
 export interface adminI{
@@ -18,4 +22,13 @@ export interface adminI{
     nombre:  string,
     email:  string,
     password:  string
+}
+
+export interface mouseI{
+    id_mouse:  string,
+    tipo_mouse:  string,
+    marca_mouse:  string,
+    modelo_mouse:  string,
+    n_serie_mouse:  string,
+    estatus_mouse:  string
 }

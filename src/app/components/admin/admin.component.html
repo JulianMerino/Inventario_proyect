@@ -1,13 +1,12 @@
-
-    <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel" >
-        <nav class="navbar navbar-expand-sm navbar-default ">
+ <!-- Left Panel -->
+    <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default " >
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active" routerLink="/administrador">
                         <a ><i class="menu-icon fa fa-laptop"></i>Equipos</a>
                     </li>
-                    <li class="" routerLink="/empleado">
+                    <li class="" routerLink="/asignaciones">
                         <a ><i class="menu-icon fa fa-users"></i>Asignaciones</a>
                     </li>
                     <li class="" routerLink="/admin-login">
@@ -17,229 +16,263 @@
             </div><!-- /.navbar-collapse -->
         </nav>
     </aside>
-  
-<div id="right-panel" class="right-panel ">
-    <app-navbar></app-navbar>
-      <div class="content" style="background-color:rgb(233, 235, 235)">
+<div id="right-panel" class="right-panel">
+   <app-navbar></app-navbar>
+      <div class="content bg-light" > <!-- style="background-color:rgb(233, 235, 235); max-width: 100%;"-->
+        <div class="animated fadeIn">
             <div class="clearfix"></div>
-                <div class="row">
+                <div class="row" *ngIf="this.formularioEquipo" > <!-- *ngIf="this.formularioEquipo" -->
                         <div class="card"> 
+                             <div class=" card-body">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">   
+                                    <button class="btn btn-outline-danger btn-sm" type="button"  (click)="cerrarFormularioEquipo()"><i class="fa fa-times"></i>Cerrar</button>  
+                                 </div>
+                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col">
-                                        <section class="card">
-                                            <div class="card-body"> <h4 class="box-title">Agregar nuevo equipo</h4></div>
+                                    <div class="col" > 
+                                        <section class="card" style="font-size:small" >
+                                            <div class="card-body"> 
+                                                <h4 class="box-title" *ngIf="this.addEquipo.get('tipo')?.value != 'Mouse'">Agregar nuevo equipo</h4>
+                                                <h4 class="box-title" *ngIf="this.addEquipo.get('tipo')?.value == 'Mouse'">Agregar nuevo mouse</h4>
+                                            </div>
                                             <div class="card-body text-secondary">
-                                                
                                                     <form [formGroup]="addEquipo">
-                                                    <div class=" row form-group">
-                                                        <div class="col col-md-6">
-                                                            <select class="form-select form-select-sm" aria-label="Default select example" formControlName="tipo" >
+                                                        <div class=" row form-group">
+                                                           <div class="col col-md-6">
+                                                            <select class="form-select form-select-sm" aria-label="Default select example" formControlName="tipo"> 
                                                                 <option label="Tipo" disabled ></option>
                                                                 <option value="PC" label="PC" ></option>
                                                                 <option value="Laptop" label="Laptop" ></option>
-                                                              </select>
-                                                      </div>
+                                                                <option value="Mouse" >Mouse</option>
+                                                           </select>      
+                                                          </div>
                                                         <div class="col col-md-6">
-                                                            <select class="form-select form-select-sm" aria-label="Default select example" formControlName="marca" >
-                                                                <option label="Marca" disabled></option>
-                                                                <option value="Lenovo" >Lenovo</option>
-                                                                <option value="Dell">Dell</option>
-                                                                <option value="Mac" >Mac</option>
-                                                              </select>
+                                                              <div class="input-group mb-3">
+                                                                <select class="form-select form-select-sm" aria-label="Default select example" formControlName="marca" >
+                                                                    <option label="Marca" disabled >Marca</option>
+                                                                    <ng-container *ngFor="let marcas of marcas_equipo ">
+                                                                      
+                                                                    <option value="{{marcas.marca}}">{{marcas.marca}}</option>
+                                                                   </ng-container>
+                                                                </select>
+                                                                <button class="btn btn-outline-success btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="true">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                                      </svg>
+                                                                </button>
+                                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                                    <div class="container bg-success"> <label class=" form-control-label text-white">Agregar marca</label></div>
+                                                                    <div class="card-body card-block">
+                                                                        <form [formGroup]="nuevaMarca">
+                                                                        <div class="form-group">
+                                                                            <input type="text"  class="form-control form-control-sm" placeholder="Nueva marca" formControlName="marca" >
+                                                                        </div>
+                                                                        <div>
+                                                                            <button type="submit" class="btn btn-outline-primary btn-block btn-sm" (click)="agregarMarcaEquipo()" >Guardar</button>
+                                                                        </div>
+                                                                    </form>
+                                                                    </div>
+                                                              </ul>
+                                                              </div>
                                                             </div>
                                                     </div>
                                                     <div class=" row form-group">
                                                         <div class="col col-md-6"><input type="text" formControlName="modelo" class="form-control form-control-sm" placeholder="Modelo" ></div>
                                                         <div class="col col-md-6"> 
-                                                            
                                                             <input type="text"  formControlName="n_serie" class="form-control form-control-sm" placeholder="Número de serie" ></div>
-                                                        
                                                     </div>
-                                                    <div class=" row form-group">
-                                                        <div class="col col-md-6"><input type="text" formControlName="m_ram"  class="form-control form-control-sm" placeholder="Memoria ram" > </div>
-                                                        <div class="col col-md-6">    <input type="text" formControlName="procesador"  class="form-control form-control-sm" placeholder="Procesador" >   </div>
+                                                    <div class=" row form-group" *ngIf="this.addEquipo.get('tipo')?.value != 'Mouse'">
+                                                        <div class="col col-md-6"><input type="text" formControlName="m_ram"  class="form-control form-control-sm" placeholder="Memoria ram"> </div>
+                                                        <div class="col col-md-6">    <input type="text" formControlName="procesador"  class="form-control form-control-sm" placeholder="Procesador">   </div>
                                                     </div>
-                                                    <div class="row form-group">
+                                                    <div class="row form-group" *ngIf="this.addEquipo.get('tipo')?.value != 'Mouse'">
                                                         <div class="col col-md-6">
-                                                            <label for="nf-email" class=" form-control-label">Memoria</label>
-                                                            <input type="date" formControlName="f_garantia" class="form-control form-control-sm" placeholder="Fecha de garantía" >
+                                                            <select class="form-select form-select-sm" aria-label="Default select example" formControlName="t_memoria" >
+                                                                <option label="T. almacenamiento" disabled></option>
+                                                                <option value="Disco duro (HDD)" >Disco duro (HDD)</option>
+                                                                <option value="Disco sólido (SSD)">Disco sólido (SSD)</option>
+                                                              </select>
                                                         </div>
-                                                        <div class="col col-md-6">
-                                                            <label for="nf-email" class=" form-control-label">Capacidad</label>
-                                                            <input type="date" formControlName="f_compra" class="form-control form-control-sm" placeholder="Fecha de compra" ></div>
-                                                       
+                                                        <div class="col col-md-6"><input type="text" formControlName="capacidad"  class="form-control form-control-sm" placeholder="Capacidad" >   </div>
                                                     </div>
-
-                                                    <div class="row form-group">
+                                                    <div class="row form-group" *ngIf="this.addEquipo.get('tipo')?.value != 'Mouse'">
                                                         <div class="col col-md-6">
-                                                            <label for="nf-email" class=" form-control-label">F. de compra</label>
+                                                            <label for="input-small" class=" form-control-label form-control-sm">F. de compra</label>
                                                             <input type="date" formControlName="f_compra" class="form-control form-control-sm" placeholder="Fecha de compra" >
                                                         </div>
-                                                       
-
-                                                        <div class="col col-md-6">
-                                                            <label for="nf-email" class=" form-control-label">F. de garantía</label>
+                                                        <div class="col col-md-6" *ngIf="this.addEquipo.get('tipo')?.value != 'Mouse'">
+                                                            <label for="nf-email" class=" form-control-label form-control-sm" >F. de garantía</label>
                                                             <input type="date" formControlName="f_garantia" class="form-control form-control-sm" placeholder="Fecha de garantía" >
                                                         </div>
-                                                       
                                                     </div>
-                                                    <div class="form-group">
-                                                        <select class="form-select form-select-sm" aria-label="Default select example" formControlName="estatus">
-                                                            <option value="No asignado">No asignado</option>
-                                                            <option value="Asignado">Asignado</option>
-                                                          
-                                                           
+                                                    <div class="form-group" *ngIf="this.addEquipo.get('tipo')?.value != 'Mouse'">
+                                                          <select class="form-select form-select-sm" aria-label="Default select example" disabled >
+                                                            <option label="No asignado"  >No asignado</option>   
                                                           </select>
-                                                       
                                                     </div>
-                                                  
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-
-
-
-                                                    <div>
-                                                       <button type="button" class="btn btn-outline-primary btn-block btn-sm" (click)="enviarDatos()">Guardar</button>
-                                                    </div>
-                                                </form>
-                                                
-                                            </div>
-                                        </section>
-                                    </div>
-                                    <div class="col">
-                                        <section class="card">
-                                            <div class="card-body"> <h4 class="box-title">Editar registro de equipo</h4></div>
-                                            <div class="card-body text-secondary">
-                                               
-                                        
-                                                 
-                                                
-                                            </div>
-                                        </section>
-                                    </div>
-                                    <div class="col">
-                                        <section class="card">
-                                            <div class="card-body"> <h4 class="box-title">Catalogo</h4></div>
-                                            <div class="card-body text-secondary">
-                                               
-                                                <div class="form-group">
-                                                    <label for="nf-email" class=" form-control-label">Agregar nueva marca</label>
-                                                    <div class="hstack gap-3">
-                                                        <input class="form-control me-auto" type="text" placeholder="" >
-                                                        <button type="button" class="btn btn-outline-success">Agregar</button>            
+                                                  <div class="form-group">
+                                                    <textarea class="form-control form-control-sm" id="exampleFormControlTextarea1" rows="2" placeholder="Observaciones" formControlName="observaciones" *ngIf="this.addEquipo.get('tipo')?.value != 'Mouse'"></textarea>
+                                                  </div>
+                                                  <div class="row form-group">
+                                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                        <button type="button" class="btn btn-outline-primary btn-sm" *ngIf="this.addEquipo.get('tipo')?.value != 'Mouse'" (click)="enviarDatos()">Guardar</button>
+                                                        <button type="button" class="btn btn-outline-success btn-sm" *ngIf="this.addEquipo.get('tipo')?.value == 'Mouse'" (click)="agregarMouse()">Guardar</button>
                                                     </div>
                                                 </div>
-                                              
+                                        </form>      
                                             </div>
                                         </section>
                                     </div>
-                                </div>
-                              
-                               
-                               
-                                  
-                        </div>
-
-                        <div class="card-body">
-                            <div class="row form-group">
-                                <div class="col col-md-6">
-                                  
-                                <h4 class="box-title">Registro de computadoras</h4>      
-                                </div>
-                                <div class="col col-md-6">
-                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                     
+                                    <div class="col">
                                         <div class="card">
                                             <div class="card-body">
-                                                <div class="stat-widget-four ">
-                                                    <div class="stat-icon dib">
-                                                        <i class="fa fa-desktop text-muted"></i>
+                                                <div class=" row form-group" style="font-size:small" >
+                                                    <div class="col col-md-6">
+                                                        <h4 class="box-title">Registros de mouse</h4>
+                                                  </div>
+                                                
+                                                </div>
+                                                <div class="mb-2 d-flex justify-content-between align-items-center">
+                                                    <div class="position-relative">
+                                                        <span class="position-absolute search"><i class="fa fa-search"></i></span>
+                                                        <input class="form-control w-100 contenedorInput" placeholder="Buscar..." [(ngModel)]="filterMouse" autocomplete="on">
                                                     </div>
-                                                    <div class="stat-content">
-                                                        <div class="text-left dib">
-                                                            <div class="stat-heading">Computadoras</div>
-                                                            <div class="stat-text">Total: 24720</div>
-                                                        </div>
+                                                    <div class="px-2" style="font-size:small">
+                                                        <span>Total de registros: {{totalMouses}}</span>
                                                     </div>
+                                                </div>
+                                                <div class="table-responsive">
+                                                <table class="table table-sm" style="font-size:small">
+                                                    <thead>
+                                                      <tr>
+                                                        <th>Tipo</th>
+                                                        <th>Marca</th>
+                                                        <th>Modelo</th>
+                                                        <th>N. serie</th>
+                                                        <th>Estatus</th>
+                                                      </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let mouse of mouses 
+                                                        | filter: filterMouse
+                                                        | paginate: { itemsPerPage: 10, currentPage: pageMouse, id: 'mouse' } ">
+                                                            <td>{{mouse.tipo_mouse}}</td>
+                                                            <td>{{mouse.marca_mouse}}</td>
+                                                            <td>{{mouse.modelo_mouse}}</td>
+                                                            <td>{{mouse.n_serie_mouse}}</td>
+                                                            <td> {{mouse.estatus_mouse}}</td>
+                                                          </tr>
+                                                    </tbody>
+                                                  </table>
+                                                  <pagination-controls  
+                                                  previousLabel=""
+                                                  nextLabel=""          
+                                                  (pageChange)="pageMouse = $event" 
+                                                  id="mouse">
+                                                </pagination-controls>
                                                 </div>
                                             </div>
                                         </div>
-                                    
-                                    </div>
-                            </div>  
-                    </div>
-                                <div class="container">
-                                    <label for="nf-email" class=" form-control-label">Filtrar</label>
-                            <input class="form-control me-2" type="text" placeholder="Buscar" aria-label="Search" [(ngModel)]="searchText" autocomplete="on">
+                                    </div>       
+                                </div>         
+                            </div>
                         </div>
                     </div>
-                        <div class="card-body--"> 
-                            
-                                <div class="container-fluid">
-                                    <table class="table table-hover table-stats  table-bordered">
-                                        <thead class="table-dark">
-                                            <tr>
-                                               
-                                                <th>Tipo</th>
-                                                <th>Marca</th>
-                                                <th>Modelo</th>
-                                                <th>N. serie</th>
-                                                <th>M. ram</th>
-                                                <th>Procesador</th>
-                                                <th>F. garantía</th>
-                                                <th>F. compra</th>
-                                                <th>Estatus</th>
-                                                <th></th>
-                                                
-                                                
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let e of equipos
-                                            | paginate: { itemsPerPage: 10, currentPage: page }
-                                            | filter:searchText; index as i">
-                                               
-                                                <td>{{e.tipo}}</td>
-                                                <td> {{e.marca}}</td>
-                                                <td>{{e.modelo}}</td>
-                                                <td> {{e.n_serie}}</td>
-                                                <td> {{e.m_ram}}</td>
-                                                <td> {{e.procesador}}</td>
-                                                <td> {{e.f_garantia}}</td>
-                                                <td> {{e.f_compra}}</td>
-                                                <td> {{e.estatus}}</td>
-                                                <td class="text-center">
-                                                <span class="badge badge-complete bg-warning text-center" (click)="obtenerEquipo(e.id_comp)" data-bs-toggle="modal" data-bs-target="#exampleModal" >
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill " viewBox="0 0 16 16">
-                                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                              </svg>
-                                            </span> 
-                                               </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>     
-                            </div>
-                            <pagination-controls
-                                (pageChange)="page = $event"
-                                previousLabel="Anterior"
-                                nextLabel="Siguiente"
-                                ></pagination-controls> 
-                        </div> <!-- /.card -->
-                   <!-- /.col-lg-8 -->
+                 <!-- Aqui está la tabla de los equipos asignados -->
+      <div class="row">
+        <div class="card">
+            <div class="card-body"> 
+                <div class=" row form-group">
+                    <div class="col col-md-6">
+                        <h4 class="box-title">Registros de computadoras</h4>
+                  </div>
+                    <div class="col col-md-6">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                           <button class="btn btn-success btn-sm" (click)="mostrarFormularioEquipo()">Agregar equipo</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="mb-2 d-flex justify-content-between align-items-center">
+                <div class="position-relative">
+                    <span class="position-absolute search"><i class="fa fa-search"></i></span>
+                    <input class="form-control w-100 contenedorInput" placeholder="Buscar..." [(ngModel)]="term" autocomplete="on">
+                </div>
+                <div class="px-2" style="font-size:small">
+                    <span>Total de registros: {{totalEquipos}}</span>
+                </div>
+            </div>
+            <div class="table-responsive" >
+            <table class="table table-sm" style="font-size:small">
+              <thead>
+                <tr class="bg-light">
+                    <th>Tipo</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>N. serie</th>
+                    <th>M. ram</th>
+                    <th>Procesador</th>
+                    <th>T. almacenamiento</th>
+                    <th>Capacidad</th>
+                    <th>  F. compra  </th>
+                    <th>F. garantía</th>
+                    <th>Estatus</th>
+                    <th>Observaciones</th>
+                    <th class="text-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-justify" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                      </svg>
+                    </th>
+                </tr>
+              </thead>
+          <tbody>
+            <tr *ngFor="let e of equipos  
+            | filter: term
+            | paginate: { itemsPerPage: 10, currentPage: page, id: 'first'}">
+                <td>{{e.tipo}}</td>
+                <td> {{e.marca}}</td>
+                <td>{{e.modelo}}</td>
+                <td> {{e.n_serie}}</td>
+                <td> {{e.m_ram}}</td>
+                <td> {{e.procesador}}</td>
+                <td>{{e.t_memoria}}</td>
+                <td>{{e.capacidad}}</td>
+                <td> {{e.f_compra}}</td>
+                <td> {{e.f_garantia}}</td>
+                <td> {{e.estatus}}</td>
+                <td>{{e.observaciones}}</td>
+                <td>
+                    <div class="hstack gap-3">
+                        <span class="badge bg-warning " (click)="obtenerEquipo(e.id_comp)" data-bs-toggle="modal" data-bs-target="#exampleModal"> <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                           <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/></svg>
+                        </span>
+                        <button class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#modal" *ngIf="e.estatus != 'Asignado'" style="font-size:small"  (click)="obtenerEquipo(e.id_comp)">
+                            Asignar
+                        </button>
+                   </div>
+               </td>
+            </tr>
+          </tbody>
+        </table>
+               <pagination-controls
+                id="first"
+                previousLabel=""
+                nextLabel=""
+                (pageChange)="page = $event">
+                </pagination-controls>
           </div>
-
-         
-    
+      </div>
+    </div>
+            </div>
+        </div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Editar registro de equipo</h5>
+          <strong class="card-title">Editar registro de equipo</strong>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -255,52 +288,153 @@
                     <div class="col col-md-6">
                        
                         <select class="form-select form-select-sm" aria-label="Default select example" [(ngModel)]="datos.marca" >
-                            <option label="Marca" disabled></option>
-                            <option value="Lenovo" >Lenovo</option>
-                            <option value="Dell">Dell</option>
-                            <option value="Mac" >Mac</option>
+                            <option label="Marca" disabled >Marca</option>
+                             <ng-container *ngFor="let marcas of marcas_equipo ">                                          
+                                <option value="{{marcas.marca}}">{{marcas.marca}}</option>
+                             </ng-container>
                           </select>
                     </div>
                 </div>
                 <div class=" row form-group">
-                    <div class="col col-md-6"><input type="text" class="form-control" placeholder="Modelo" [(ngModel)]="datos.modelo"></div>
-                    <div class="col col-md-6"> <input type="text" class="form-control" placeholder="Número de serie" [(ngModel)]="datos.n_serie"></div>
+                    <div class="col col-md-6"><input type="text" class="form-control form-control-sm" placeholder="Modelo" [(ngModel)]="datos.modelo"></div>
+                    <div class="col col-md-6"> <input type="text" class="form-control form-control-sm" placeholder="Número de serie" [(ngModel)]="datos.n_serie"></div>
                     
                 </div>
                 <div class=" row form-group">
-                    <div class="col col-md-6"><input type="text"    class="form-control" placeholder="Memoria ram" [(ngModel)]="datos.m_ram" > </div>
-                    <div class="col col-md-6">    <input type="text"   class="form-control" placeholder="Procesador" [(ngModel)]="datos.procesador" >   </div>
+                    <div class="col col-md-6"><input type="text"    class="form-control form-control-sm" placeholder="Memoria ram" [(ngModel)]="datos.m_ram" > </div>
+                    <div class="col col-md-6">    <input type="text"   class="form-control form-control-sm" placeholder="Procesador" [(ngModel)]="datos.procesador" >   </div>
                 </div>
                 <div class="row form-group">
                     <div class="col col-md-6">
-                        <label for="nf-email" class=" form-control-label">F. de garantía</label>
-                        <input type="date" class="form-control" placeholder="Fecha de garantía" [(ngModel)]="datos.f_garantia">
-                    </div>
+                        <select class="form-select form-select-sm" aria-label="Default select example" [(ngModel)]="datos.t_memoria" >
+                            <option label="T. almacenamiento" disabled ></option>
+                            <option value="Disco duro (HDD)" >Disco duro (HDD)</option>
+                            <option value="Disco solido (SSD)">Disco sólido (SSD)</option>
+                          </select>
+                       </div>
+                    <div class="col col-md-6"><input type="text" [(ngModel)]="datos.capacidad"  class="form-control form-control-sm" placeholder="Capacidad" >   </div>
+                </div>
+                <div class="row form-group">
                     <div class="col col-md-6">
                         <label for="nf-email" class=" form-control-label">F. de compra</label>
-                        <input type="date" class="form-control" placeholder="Fecha de compra" [(ngModel)]="datos.f_compra"></div>
-                   
+                        <input type="date" class="form-control form-control-sm" placeholder="Fecha de compra" [(ngModel)]="datos.f_compra">
+                    </div>
+                    <div class="col col-md-6">
+                        <label for="nf-email" class=" form-control-label">F. de garantía</label>
+                        <input type="date" class="form-control form-control-sm" placeholder="Fecha de garantía" [(ngModel)]="datos.f_garantia">
+                    </div>
                 </div>
-            
                 <div class="form-group">
-                    <select class="form-select" aria-label="Default select example" [(ngModel)]="datos.estatus">
-                        <option label="Estatus" disabled></option>
-                        <option value="Asignado">Asignado</option>
-                        <option value="No asignado">No asignado</option>
-                       
-                      </select>
-                   
+                    <input type="text" class="form-control form-control-sm" placeholder="Estatus" [(ngModel)]="datos.estatus" disabled>
                 </div>
-                 
-               
-                 
-            
-        </div>
-        </div>
+                <div class="form-group">
+                    <textarea class="form-control form-control-sm" id="exampleFormControlTextarea1" rows="2" placeholder="Observaciones" [(ngModel)]="datos.observaciones"></textarea>
+                  </div> 
+                 </div>           
+             </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" (click)="editarEquipo()">Guardar cambios</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary btn-sm" (click)="editarEquipo()" data-bs-dismiss="modal">Guardar</button>
         </div>
       </div>
     </div>
   </div>
+
+
+<!-- Modal: Para asignar equipos de computo a un empleado-->
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <strong class="card-title">Asignación de computadoras</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-4">
+                    <section class="card">
+                        <div class="card-body text-secondary">
+                            <h4 class="box-title">Agregar nuevo empleado</h4>                      
+                                    <form [formGroup]="empleado_form">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-sm" placeholder="Nombre" formControlName="n_completo" >
+                                    </div>
+                                    <div class="form-group" >
+                                        <select class="form-select form-select-sm" aria-label="Default select example" formControlName="cliente">
+                                            <option label="Cliente" disabled></option>
+                                            <ng-container *ngFor="let cliente of empleados">
+                                            <option  *ngIf="cliente.tipo_clientes != '' && cliente.tipo_clientes != null" value="{{cliente.tipo_clientes}}"> {{cliente.tipo_clientes}}</option>
+                                        </ng-container>
+                                          </select>
+                                    </div>
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <button type="submit" class="btn btn-outline-primary btn-sm" (click)="agregarEmpleado()">Guardar</button>
+                                        </div>
+                                    </form>
+                        </div>
+                    </section>
+                    <section class="card">
+                          <div class="card-body text-secondary">
+                        <h4 class="box-title">Agregar nuevo cliente</h4>                          
+                                      <form [formGroup]="empleado_form">
+                                          <div class="hstack gap-3">
+                                          <input type="text" class="form-control form-control-sm" placeholder="Nuevo cliente" formControlName="tipo_clientes">
+                                          <button type="submit" class="btn btn-outline-primary btn-sm" (click)="agregarCliente()">Agregar</button>
+                                      </div>
+                                  </form>
+                          </div>
+                      </section>
+                </div>
+                <div class="col-8">
+                    <section class="card">
+                        <div class="card-body text-secondary">                  
+                            <div class="form-group">
+                        <strong class="card-title">Asignación de computadoras</strong>
+                        </div>        
+            <form [formGroup]="equipo_asignado">
+                    <div class="form-group">
+                    <label  class="form-label form-control-sm">Empleado</label>  
+                    <input class="form-control form-control-sm" list="datalistOptions" id="exampleDataList" placeholder="Seleccionar empleado"  formControlName="fk_id_empleado">
+                    <datalist id="datalistOptions">
+                    <ng-container *ngFor="let empleado of empleados ">
+                    <option *ngIf="empleado.tipo_clientes == ''"  value="{{empleado.id_prop}} ">{{empleado.n_completo}} - {{empleado.cliente}}</option>
+                    </ng-container>
+                    </datalist>
+                    <label  class="form-label form-control-sm">Equipo</label>
+                    <input class="form-control form-control-sm " list="listOption"  id="exampleDataLists" placeholder="Seleccionar equipo"  formControlName="fk_id_equipo" [(ngModel)]="datos.id_comp"   >
+                    <datalist id="listOption">
+                    <option  value="{{equipo.id_comp}}" *ngFor="let equipo of equipos">{{equipo.tipo}} - {{equipo.marca}} - {{equipo.n_serie}} </option>
+                    </datalist>
+
+                    <label  class="form-label form-control-sm">Mouse</label>
+                    <input class="form-control form-control-sm " list="listOptionMouse"  id="exampleDataLists" placeholder="Seleccionar mouse"  formControlName="fk_id_mouse">
+                    <datalist id="listOptionMouse">
+                        <ng-container *ngFor="let mouse of mouses">
+                     <option *ngIf="mouse.estatus_mouse == 'No asignado'"  value="{{mouse.id_mouse}}" >{{mouse.tipo_mouse}} - {{mouse.marca_mouse}} - {{mouse.n_serie_mouse}} </option>
+                    </ng-container>
+                    </datalist>       
+                    <label  class=" form-control-label form-control-sm">Fecha de asignación</label>
+                    <input type="date" [ngModel]='fecha|date:"yyyy-MM-dd"' (ngModelChange)='fecha=$event' class="form-control form-control-sm"  formControlName="f_asignacion">
+                    <label  class=" form-control-label form-control-sm" >Estado</label>
+                    <select class="form-select form-select-sm" aria-label="Default select example" disabled >
+                    <option value="Activo"selected  >Activo</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+                </section>
+                </div>
+                   </div>
+                     <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal" (click)="resetForm()">Cancelar</button>
+                     <button type="button" class="btn btn-primary btn-sm" (click)="asignarEquipo(datos)" data-bs-dismiss="modal">Asignar</button>
+                     </div>
+                </div>
+           </div>
+     </div>
+
+
+
+
+
+  

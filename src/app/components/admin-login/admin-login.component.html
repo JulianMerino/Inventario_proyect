@@ -1,5 +1,4 @@
-
-    <!-- Left Panel -->
+<!-- Left Panel -->
     <aside id="left-panel" class="left-panel">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
@@ -7,113 +6,94 @@
                     <li class="" routerLink="/administrador">
                         <a ><i class="menu-icon fa fa-laptop"></i>Equipos</a>
                     </li>
-                    <li class="" routerLink="/empleado">
+                    <li class="" routerLink="/asignaciones">
                         <a ><i class="menu-icon fa fa-users"></i>Asignaciones</a>
                     </li>
-                   
                     <li class="active" routerLink="admin-login">
                         <a ><i class="menu-icon fa fa-user "></i>Administrador</a>
                     </li>
-                    
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>
     </aside>
 <div id="right-panel" class="right-panel ">
     <app-navbar></app-navbar>
-      
       <div class="content bg-light">
                 <div class="row">     
-                        <div class="card">
+                        <div class="card ">
                             <div class="card-body">
-                              
-                                <div class=" row form-group">
+                               <div class=" row form-group">
                                     <div class="col col-md-6">
                                         <h4 class="box-title">Administradores</h4>
-                                  </div>
-                                    <div class="col col-md-6">
-                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                            <button class="btn btn-outline-success" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                                    </div>
+                                        <div class="col col-md-6">
+                                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                                <button class="btn btn-outline-success btn-sm" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                                                   </svg>
                                                 Agregar
-                                              </button>
+                                                </button>
                                               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            
                                                     <div class="card-header bg-success"><strong class="text-white">Agregar nuevo</strong></div>
                                                     <div class="card-body card-block">
                                                         <form [formGroup]="formularioLogin">
                                                         <div class="form-group">
-                                                            <input type="text" formControlName="nombre" class="form-control" placeholder="Ingresa tu nombre..">
+                                                            <input type="text" formControlName="nombre" class="form-control form-control-sm" placeholder="Ingresa tu nombre..">
                                                         </div>
                                                         <div class="form-group">
-                                                           
-                                                            <input type="text" formControlName="email" class="form-control" placeholder="Ingresa tu email..">
+                                                            <input type="text" formControlName="email" class="form-control form-control-sm" placeholder="Ingresa tu email..">
                                                             <div class="form-text text-danger" *ngIf="this.formularioLogin.get('email')?.errors?.['email']">Ingresa un correo valido</div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="text" formControlName="password" class="form-control" placeholder="Ingresa tu contraseña">
+                                                            <input type="text" formControlName="password" class="form-control form-control-sm" placeholder="Ingresa tu contraseña">
                                                             <div class="form-text text-danger" *ngIf="this.formularioLogin.get('password')?.errors?.['minlength']">Minimo 8 caracteres</div>
                                                         </div>
                                                         <div>
-                                                            <button type="submit" class="btn btn-outline-primary btn-block" (click)="agregar()">
-                                                               
-                                                               Guardar
-                                                                
-                                                            </button>
-                                                        </div>
-                                                        
-                                                    </form>
+                                                            <button type="submit" class="btn btn-outline-primary btn-block btn-sm" (click)="agregar()">Guardar</button>
+                                                        </div>   
+                                                        </form>
                                                     </div>
-                                               
                                               </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
                             <div class="card-body--">
-                                <div class="">
-                                    <table class="table table-bordered table-hover">
-                                        <thead class="table-dark">
+                                <div class="table-responsive">
+                                    <table class="table table-sm" style="font-size:small;">
+                                        <thead class="table-light">
                                             <tr>
-                                            
                                                 <th>Nombre</th>
                                                 <th>Email</th>
                                                 <th>Contraseña</th>
                                                
                                                 <th>Eliminar</th>
-                                                
-                                            </tr>
+                                          </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let a of admin |paginate: { itemsPerPage: 10, currentPage: pages} ">
-                                                
+                                            <tr *ngFor="let a of admin |paginate: { itemsPerPage: 10, currentPage: pages} ">                
                                                 <td>{{a.nombre}}</td>
                                                 <td>{{a.email}}</td>
                                                 <td>{{a.password}}</td>
-                                               
                                                 <td class="text-center">
                                                     <span class="badge badge-complete bg-danger" (click)="eliminar(a.id)"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
                                                         <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
-                                                      </svg></span>
+                                                      </svg>
+                                                    </span>
                                                </td>
                                             </tr>
-                                           
-                                         
                                         </tbody>
                                     </table>
                                     <pagination-controls
                                     (pageChange)="pages = $event"
-                                    
-                                    previousLabel="Anterior"
-                                    nextLabel="Siguiente"
-                                    ></pagination-controls> 
+                                    previousLabel=""
+                                    nextLabel="">
+                                    </pagination-controls> 
                                 </div> 
                             </div>
                         </div> 
-            </div>
+                     </div>
          
     

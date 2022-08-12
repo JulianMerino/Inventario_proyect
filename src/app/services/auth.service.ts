@@ -1,44 +1,44 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  url = 'http://localhost/server/api-rest/api.php';
-  URL= 'http://localhost/server/api-rest/api-login';
+  url = environment.url;
 
   constructor(private http: HttpClient) { }
 
   Login(datos: any): Observable<any>{
-    return this.http.post(this.url + '?login', datos);
+    return this.http.post(this.url + 'api.php?login', datos);
   }
 
   setToken(token: any){
-    localStorage.setItem('token', token );
-
+    sessionStorage.setItem('token', token );
   }
+
   deleteToken(){
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
   }
 
   insertarNuevo(registro: any): Observable<any>{
     console.log("Servicio:", registro)
-    return this.http.post(this.URL + '/post.php', registro);
-
+    return this.http.post(this.url + 'api-login/post.php', registro);
   }
 
   mostrarRegistros(): Observable<any>{
-    return this.http.get(this.URL + '/getAll.php');
+    return this.http.get(this.url + 'api-login/getAll.php');
   }
 
   eliminarRegistro(id: any): Observable<any>{
     console.log("Servicio",id);
-    return this.http.get(`${this.URL}/delete.php?id=${id}`);
+    return this.http.get(`${this.url}api-login/delete.php?id=${id}`);
   }
 
   validarLogin(registro: any): Observable<any>{
-    return this.http.post(this.URL + '/login.php', registro)
+    return this.http.post(this.url + 'api-login/login.php', registro)
   }
 
 

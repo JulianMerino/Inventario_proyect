@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormGroup,FormBuilder, Validators } from '@angular/forms';
-import { adminI} from 'src/app/models/equipo';
+import { adminI } from 'src/app/models/equipo';
 @Component({
   selector: 'app-admin-login',
   templateUrl: './admin-login.component.html',
@@ -27,6 +27,7 @@ export class AdminLoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.mostrarRegistros();
+   
    
   }
 
@@ -56,5 +57,6 @@ export class AdminLoginComponent implements OnInit {
     })
   }
 
+ 
 
 }

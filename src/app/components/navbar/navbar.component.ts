@@ -15,16 +15,11 @@ export class NavbarComponent implements OnInit {
     this.Verificar();
   }
     Verificar(){
-      let validateSession = localStorage.getItem('token');
-      console.log('session: ', validateSession);
-  
-      if(validateSession != null ){
-       console.log('Sesion activa');
-   
-       
+      let validateSession = sessionStorage.getItem('token');
+      if(validateSession != null || validateSession !='' ){
       }
-    if( localStorage.getItem('token') == null){
-      this.router.navigate(['']);
+    if( sessionStorage.getItem('token') == null || sessionStorage.getItem('token') == ''){
+      this.router.navigate(['/']);
       }
     
    }
